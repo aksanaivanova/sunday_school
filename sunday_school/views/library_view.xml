@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+        <!-- author-->
+        <record id="view_sunday_author_tree" model="ir.ui.view">
+            <field name="name">sunday.author.tree</field>
+            <field name="model">sunday.author</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Authors">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="view_sunday_author_form" model="ir.ui.view">
+            <field name="name">sunday.author.form</field>
+            <field name="model">sunday.author</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Author">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <notebook>
+                            <page string="Books">
+                                <field name="book_ids"  nolabel="1" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="act_sunday_author_view">
+            <field name="name">Authors</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sunday.author</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_sunday_author_view_form">
+            <field name="act_window_id" ref="act_sunday_author_view" />
+            <field name="sequence" eval="20" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_sunday_author_form" />
+        </record>
+        <record model="ir.actions.act_window.view" id="act_sunday_author_view_tree">
+            <field name="act_window_id" ref="act_sunday_author_view" />
+            <field name="sequence" eval="10" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_sunday_author_tree" />
+        </record>
+        
+        <!-- tag -->        
+        <record id="view_sunday_tag_tree" model="ir.ui.view">
+            <field name="name">sunday.tag.tree</field>
+            <field name="model">sunday.tag</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Tags" editable="top">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="act_sunday_tag_view">
+            <field name="name">Tags</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sunday.tag</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_sunday_tag_view_tree">
+            <field name="act_window_id" ref="act_sunday_tag_view" />
+            <field name="sequence" eval="10" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_sunday_tag_tree" />
+        </record>
+
+        <!-- publisher -->
+        <record id="view_sunday_publisher_tree" model="ir.ui.view">
+            <field name="name">sunday.publisher.tree</field>
+            <field name="model">sunday.publisher</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Publisher" editable="top">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="act_sunday_publisher_view">
+            <field name="name">Publishers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sunday.publisher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_sunday_publisher_view_tree">
+            <field name="act_window_id" ref="act_sunday_publisher_view" />
+            <field name="sequence" eval="10" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_sunday_publisher_tree" />
+        </record>
+
+
+    </data>
+</odoo>

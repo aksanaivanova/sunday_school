@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_sunday_library_root"
+                  name="Library" sequence="80"/>
+
+
+        <menuitem id="menu_sunday_library_books" name="All books"
+            parent="menu_sunday_library_root" sequence="10"/>
+
+        <menuitem id="menu_sunday_book" name="Books"
+            parent="menu_sunday_library_books" sequence="10"
+            action="act_sunday_book_view" />
+
+
+
+        <menuitem id="menu_sunday_school_library_config" name="Configuration"
+            parent="menu_sunday_library_root" sequence="20"/>
+
+        <menuitem id="menu_sunday_author_sub" name="Authors"
+            parent="menu_sunday_school_library_config" sequence="30"
+            action="act_sunday_author_view"/>
+        <menuitem id="menu_sunday_tag_sub" name="Tags"
+            parent="menu_sunday_school_library_config" sequence="40"
+            action="act_sunday_tag_view" />
+        <menuitem id="menu_sunday_publisher_sub" name="Publisher"
+            parent="menu_sunday_school_library_config" sequence="50"
+            action="act_sunday_publisher_view"/>
+
+
+    </data>
+</odoo>

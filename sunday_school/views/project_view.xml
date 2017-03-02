@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_project_project_tree" model="ir.ui.view">
+            <field name="name">project.project.tree</field>
+            <field name="model">project.project</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Subjects">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="view_project_project_form" model="ir.ui.view">
+            <field name="name">project.project.form</field>
+            <field name="model">project.project</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Subjects">
+                    <sheet>
+                        <group>
+                            <group col="4">
+                                <field name="name" />
+                            </group>
+                            <group>
+                                <field name="teachers_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <field name="desc"/>
+                        <notebook>
+                            <page string="Students">
+                                <field name="student_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="act_project_project_view">
+            <field name="name">Subjects</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.project</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_project_project_view_form">
+            <field name="act_window_id" ref="act_project_project_view" />
+            <field name="sequence" eval="20" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_project_project_form" />
+        </record>
+        <record model="ir.actions.act_window.view" id="act_project_project_view_tree">
+            <field name="act_window_id" ref="act_project_project_view" />
+            <field name="sequence" eval="10" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_project_project_tree" />
+        </record>
+        
+     <!-- Add fields to project.task-->
+        <record model="ir.ui.view" id="sunday_view_task_form2">
+            <field name="name">sunday.project.task.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="replace">
+                    <field name="user_id" />
+                </xpath>
+                <xpath expr="//field[@name='date_deadline']" position="before">
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Correct search project.task-->
+        <record model="ir.ui.view" id="sunday_view_task_search_form">
+            <field name="name">sunday.project.task.search.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//filter[@name='my_tasks']" position="replace">
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+
+        <!-- Project.task calendar -->
+        <record id="project.view_task_calendar" model="ir.ui.view">
+            <field name="name">project.task.calendar</field>
+            <field name="model">project.task</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <calendar color="user_id" string="Tasks" mode="week"
+                          display="[name]" use_contacts="True"
+                          date_start="date_start" date_stop="date_end">
+                    <field name="name"/>
+                    <field name="project_id"/>
+                    <field name="user_id"/>
+                </calendar>
+            </field>
+        </record>  
+        
+    </data>
+</odoo>

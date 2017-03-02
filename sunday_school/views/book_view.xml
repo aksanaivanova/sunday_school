@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_sunday_book_tree" model="ir.ui.view">
+            <field name="name">sunday.book.tree</field>
+            <field name="model">sunday.book</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Books">
+                    <field name="name" />
+                    <field name="isbn" />
+                    <field name="tags" />
+                    <field name="author_ids" />
+                    <field name="edition" />
+                </tree>
+            </field>
+        </record>
+        <record id="view_sunday_book_form" model="ir.ui.view">
+            <field name="name">sunday.book.form</field>
+            <field name="model">sunday.book</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="book">
+                    <sheet>
+                        <group col="2">
+                            <h1>
+                                <field name="name" placeholder="book Name" style="width: 100%%" />
+                            </h1>
+                        </group>
+                        <newline/>
+                        <group col="4">
+                            <field name="author_ids" widget="many2many_tags" />
+                            <field name="publisher_ids" widget="many2many_tags" />
+                            <field name="isbn" />
+                            <field name="tags" widget="many2many_tags" />
+                        </group>
+                        <notebook colspan="4">
+                            <page name="description" string="Description">
+                                <field name="description" colspan="4" />
+                            </page>
+                            <page name="movements" string="Movements" >
+                                <field name="movement_line" >
+                                    <tree editable="top" delete="false">
+                                        <field name="partner_id"/>
+                                        <field name="issued_date"/>
+                                        <field name="return_date"/>
+                                        <field name="state"/>
+                                        <button name="returned" string="Return" type="object" states="issue"/>
+                                        <button name="lost" string="Lost" type="object" states="issue"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="book_queue_requests" string="Book Queue Requests">
+                                <field name="queue_ids" nolabel="1" delete="false">
+                                    <tree string="Book Queue Request" editable="top">
+                                        <field name="partner_id" readonly="1"/>
+                                        <field name="date" />
+                                        <field name="state" readonly="1"/>
+                                        <button name="do_accept" string="Accept" type="object"
+                                            states="request" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="act_sunday_book_view">
+            <field name="name">All book</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sunday.book</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_sunday_book_view_form">
+            <field name="act_window_id" ref="act_sunday_book_view" />
+            <field name="sequence" eval="20" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_sunday_book_form" />
+        </record>
+        <record model="ir.actions.act_window.view" id="act_sunday_book_view_tree">
+            <field name="act_window_id" ref="act_sunday_book_view" />
+            <field name="sequence" eval="10" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_sunday_book_tree" />
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+<t t-extend="Login">
+    <t t-jquery="img" t-operation="replace">
+    <img src='/sunday_school/static/src/img/icon.png'
+    width="180px" />
+    </t>
+     <t t-jquery="div.oe_login_footer" t-operation="after">
+            <div class="oe_login_footer" style="top:250px">
+            </div>
+     </t>
+</t>
+<t t-extend="WebClient">
+    <t t-jquery="span.url" t-operation="replace">
+    </t>
+</t>
+</templates>
